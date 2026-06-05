@@ -35,35 +35,45 @@
         #coverScreen {
             position: absolute;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('4cc9c721-d1dc-4790-865f-67f9f231715c.png');
-            background-size: cover;
-            background-position: center;
+            background: radial-gradient(circle at center, #3e1f10 0%, #050508 100%); /* ปรับรัศมีหน้าปกให้เข้าธีม */
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* จัดปุ่มให้อยู่ด้านล่าง */
+            justify-content: center;
             align-items: center;
             z-index: 2000;
-            padding-bottom: 12vh; /* ขยับปุ่มขึ้นมาให้ตรงกับตำแหน่งในภาพ */
         }
-        
+        #coverScreen h1 {
+            font-size: 6em;
+            color: #ff7f50; /* สีส้ม */
+            text-shadow: 0 0 30px rgba(255, 127, 80, 0.8), 0 0 60px rgba(255, 127, 80, 0.4);
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+        #coverScreen p {
+            color: #aaa;
+            font-size: 1.5em;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+        }
         #btnEnterMenu {
             font-size: 1.8em;
-            padding: 15px 60px;
-            background: transparent; /* ทำให้ปุ่มโปร่งใส */
-            color: transparent; /* ซ่อนข้อความเพื่อให้เห็นปุ่มจากภาพ */
-            border: 2px solid transparent; 
-            border-radius: 30px; /* ปรับความโค้งให้เข้ากับปุ่มในภาพ */
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: 2px solid #ff7675;
+            border-radius: 10px;
             cursor: pointer;
             transition: 0.3s;
             font-weight: bold;
-            box-shadow: none;
-            width: 320px; /* กำหนดขนาดปุ่มให้ใกล้เคียงกับในภาพ */
-            height: 70px;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+            letter-spacing: 2px;
         }
         #btnEnterMenu:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(231, 76, 60, 0.8); /* เพิ่มแสงสะท้อนตอนเอาเมาส์ชี้ */
-            border-color: rgba(231, 76, 60, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(231, 76, 60, 1);
+            background: linear-gradient(45deg, #ff7675, #e74c3c);
         }
 
         #mainMenu, #soloMenu, #multiMenu, #lobbyMenu {
@@ -386,7 +396,9 @@
 
     <!-- หน้าปกเกม -->
     <div id="coverScreen">
-        <button id="btnEnterMenu">START GAME</button>
+        <h1>MARTIAN WAR RUINS</h1>
+        <p>สงครามสมรภูมิหุ่นรบ</p>
+        <button id="btnEnterMenu">🚀 START GAME</button>
     </div>
 
     <!-- เมนูหลัก -->
