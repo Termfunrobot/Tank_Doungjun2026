@@ -205,18 +205,18 @@
         .gold-text { color: #f1c40f; }
         .kill-text { color: #e74c3c; }
         
-        /* ร้านค้า Armory ด้านบนตรงกลาง */
+        /* ร้านค้า Armory ด้านบนตรงกลาง (ปรับปุ่มและกรอบลง 50%) */
         #shopUI {
             position: absolute; 
             top: 15px; 
             left: 50%; 
             transform: translateX(-50%); 
             display: none; 
-            gap: 15px; 
+            gap: 8px; 
             z-index: 10; 
             background: rgba(15, 10, 5, 0.85); 
-            padding: 10px 20px; 
-            border-radius: 8px; 
+            padding: 5px 12px; 
+            border-radius: 6px; 
             border: 1px solid #f1c40f;
             box-shadow: 0 0 15px rgba(241, 196, 15, 0.3);
             align-items: center;
@@ -226,12 +226,13 @@
             background: linear-gradient(45deg, #d35400, #ff7f50); 
             color: white; 
             border: none; 
-            padding: 8px 15px; 
-            border-radius: 5px; 
+            padding: 4px 10px; 
+            border-radius: 4px; 
             font-weight: bold; 
             cursor: pointer; 
             transition: 0.2s;
-            font-size: 0.95em;
+            font-size: 0.72em;
+            line-height: 1.2;
         }
         .shop-btn:hover:not(:disabled) { 
             transform: scale(1.05); 
@@ -244,7 +245,7 @@
             border: 1px solid #555;
             box-shadow: none;
         }
-        .shop-cost { color: #f1c40f; font-size: 1.1em; }
+        .shop-cost { color: #f1c40f; font-size: 1em; }
 
         .objective-ui { position: absolute; top: 210px; right: 20px; text-align: right; pointer-events: none; display: none; }
         .base-hp { font-size: 1.2em; font-weight: bold; margin-bottom: 5px; text-shadow: 1px 1px 2px #000; }
@@ -353,6 +354,26 @@
             color: white; font-size: 0.35em; font-weight: bold; z-index: 1;
         }
 
+        /* ส่วนแสดงเครดิตและ Kills ด้านบนซ้าย ใต้ Minimap อย่างถาวร */
+        #topStatsHUD {
+            position: absolute;
+            top: 230px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(15, 10, 5, 0.85);
+            border: 1px solid #f1c40f;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            font-weight: bold;
+            font-size: 1.1em;
+            pointer-events: none;
+            min-width: 140px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
         /* ----- MEDIA QUERIES สำหรับมือถือ (ปรับให้เล็กจิ๋วสุดๆ 10 เท่า และรองรับมือถือแนวนอน) ----- */
         @media (max-width: 950px), (max-height: 600px) and (orientation: landscape) {
             .skills-ui { gap: 2px; bottom: 5px; right: 5px; }
@@ -389,6 +410,18 @@
             .menu-box label { font-size: 0.2em; margin-bottom: 2px;}
             .menu-box select, .menu-box input[type="text"] { font-size: 0.2em; padding: 2px; margin-bottom: 3px;}
             .menu-box button { font-size: 0.2em; padding: 2px 4px; }
+
+            /* ปรับแต่งกรอบ HUD ถาวรบนจอมือถือ */
+            #topStatsHUD {
+                top: 32px !important;
+                left: 5px !important;
+                padding: 2px 5px !important;
+                font-size: 0.15em !important;
+                border-width: 1px !important;
+                border-radius: 1px !important;
+                gap: 2px !important;
+                min-width: 35px !important;
+            }
         }
     </style>
 </head>
@@ -528,10 +561,10 @@
 
     <!-- UI ร้านค้า (Armory Shop) -->
     <div id="shopUI">
-        <span style="color: #f1c40f; font-weight: bold; font-size: 1.2em;">🛒 ARMORY:</span>
-        <button id="btnUpgradeDamage" class="shop-btn">⚔️ DMG (+25%)<br><span id="costDamage" class="shop-cost">100</span> CR</button>
-        <button id="btnUpgradeHP" class="shop-btn">🛡️ ARMOR (+500)<br><span id="costHP" class="shop-cost">100</span> CR</button>
-        <button id="btnUpgradeSkill" class="shop-btn">⚡ SKILL (+30%)<br><span id="costSkill" class="shop-cost">100</span> CR</button>
+        <span style="color: #f1c40f; font-weight: bold; font-size: 0.9em;">🛒 ARMORY:</span>
+        <button id="btnUpgradeDamage" class="shop-btn">⚔️ DMG (+25%)<br><span id="costDamage" class="shop-cost">200</span> CR</button>
+        <button id="btnUpgradeHP" class="shop-btn">🛡️ ARMOR (+500)<br><span id="costHP" class="shop-cost">200</span> CR</button>
+        <button id="btnUpgradeSkill" class="shop-btn">⚡ SKILL (+30%)<br><span id="costSkill" class="shop-cost">200</span> CR</button>
     </div>
 
     <div class="ui" id="uiLeft">
@@ -541,6 +574,12 @@
         <div class="stat gold-text">CREDITS: <span id="playerGold">0</span></div>
         <div class="stat kill-text">KILLS: <span id="playerKills">0</span></div>
         <div class="stat" style="color: #3498db; margin-top: 10px;">TIME SCORE: <span id="timeScoreDisplay">3600</span></div>
+    </div>
+
+    <!-- แสดง Credits และ Kills ตลอดเวลาบนหน้าจอด้านซ้าย (ใต้ MiniMap) -->
+    <div id="topStatsHUD">
+        <div class="stat gold-text" style="margin: 0; text-shadow: 1px 1px 2px #000;">CREDITS: <span id="hudGold">0</span></div>
+        <div class="stat kill-text" style="margin: 0; text-shadow: 1px 1px 2px #000;">KILLS: <span id="hudKills">0</span></div>
     </div>
 
     <div class="objective-ui" id="uiRight">
@@ -635,6 +674,14 @@
         document.getElementById('btnEnterMenu').addEventListener('click', () => {
             document.getElementById('coverScreen').style.display = 'none';
             document.getElementById('mainMenu').style.display = 'flex';
+            
+            // ขอ Fullscreen ทันทีที่คลิกเข้าเกม
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+                document.getElementById('btnFullscreen').innerText = "🔳 EXIT FULL";
+            }
         });
 
         // Navigation Events
@@ -788,7 +835,8 @@
         let difficultyMultiplier = 1.0;
         let cameraZoom = 1.0; 
 
-        let shopCosts = { damage: 100, hp: 100, skill: 100 };
+        // แก้ไขราคาร้านค้าให้แพงขึ้น 2 เท่า (เริ่มต้นที่ 200)
+        let shopCosts = { damage: 200, hp: 200, skill: 200 };
         let shopLevels = { damage: 0, hp: 0, skill: 0 };
         let skillPowerMult = 1.0;
 
@@ -1205,33 +1253,33 @@
             bEnt.respawnTimer = Date.now() + bEnt.respawnTime;
         }
 
-        // ระบบแจกรางวัลที่รองรับการฆ่าโดยบอทด้วย
+        // ระบบแจกรางวัลที่รองรับการฆ่าโดยบอทด้วย (ปรับลดเครดิตเหลือ 20%)
         function processKillReward(ent, killer) {
             if (!(killer instanceof Tank)) return; // ตรวจสอบว่าคนฆ่าคือผู้เล่นหรือบอท
 
             let isLocalPlayer = (killer === tank);
 
             if (ent instanceof Minion) {
-                killer.gold += 50; 
+                killer.gold += 10; 
                 killer.gainXP(50); 
             } else if (ent instanceof BossTank) {
-                killer.gold += 200; 
+                killer.gold += 40; 
                 if (isLocalPlayer) SoundFX.kill(); 
                 killer.kills = (killer.kills || 0) + 1;
 
                 killer.forceLevelUp(2); 
-                if (isLocalPlayer) showMessage(`🎯 HEAVY UNIT DESTROYED! +2 LEVELS! +200 CR!`, '#e74c3c', 4000);
+                if (isLocalPlayer) showMessage(`🎯 HEAVY UNIT DESTROYED! +2 LEVELS! +40 CR!`, '#e74c3c', 4000);
             } else if (ent instanceof Turret) {
-                killer.gold += 200; 
+                killer.gold += 40; 
                 killer.forceLevelUp(1); 
-                if (isLocalPlayer) showMessage(`🎯 OUTPOST DESTROYED! +1 LEVEL! +200 CR!`, '#00d2d3', 4000);
+                if (isLocalPlayer) showMessage(`🎯 OUTPOST DESTROYED! +1 LEVEL! +40 CR!`, '#00d2d3', 4000);
             } else if (ent instanceof Tank) {
-                killer.gold += 200; 
+                killer.gold += 40; 
                 if (isLocalPlayer) SoundFX.kill(); 
                 killer.kills = (killer.kills || 0) + 1;
 
                 killer.forceLevelUp(1);
-                if (isLocalPlayer) showMessage(`🎯 ENEMY UNIT ELIMINATED! +1 LEVEL! +200 CR!`, '#e74c3c', 4000);
+                if (isLocalPlayer) showMessage(`🎯 ENEMY UNIT ELIMINATED! +1 LEVEL! +40 CR!`, '#e74c3c', 4000);
             }
 
             // อัปเดต UI เฉพาะถ้าผู้เล่นของเราเป็นคนฆ่า
@@ -1297,6 +1345,7 @@
                     document.getElementById('uiLeft').style.display = 'none';
                     document.getElementById('uiRight').style.display = 'none';
                     document.getElementById('shopUI').style.display = 'none';
+                    document.getElementById('topStatsHUD').style.display = 'none';
                     document.getElementById('leaderboardUI').style.display = 'none';
                     document.getElementById('weaponUI').style.display = 'none';
                     document.getElementById('skillsUI').style.display = 'none';
@@ -2498,19 +2547,35 @@
         }
 
         class BossTank extends Entity {
-            constructor(x, y, lane, maxHp, level) {
+            constructor(x, y, lane, maxHp, level, bossType = 'heavy') {
                 let finalHp = maxHp * difficultyMultiplier;
-                super(x, y, 45, 'enemy', finalHp, finalHp); 
-                this.width = 100; this.height = 70;
+                // บอสวิ่งเร็วจะตัวเล็กลงนิดหน่อย
+                let radius = bossType === 'fast' ? 35 : 45;
+                super(x, y, radius, 'enemy', finalHp, finalHp); 
+                
+                this.bossType = bossType;
+                if (this.bossType === 'fast') {
+                    this.width = 70; this.height = 45;
+                    this.speed = 1.8; // วิ่งเร็วกว่าบอสปกติ 2 เท่า
+                    this.attackRange = 350;
+                    this.damage = 35 * difficultyMultiplier; 
+                    this.fireRate = 500;
+                } else {
+                    this.width = 100; this.height = 70;
+                    this.speed = 0.8;
+                    this.attackRange = 450;
+                    this.damage = 60 * difficultyMultiplier;
+                    this.fireRate = 800; 
+                }
+
                 this.lane = lane; this.level = level; 
                 this.waypoints = [...PATHS[lane]].reverse();
                 this.waypoints.push({x: ALLY_BASE_POS.x, y: ALLY_BASE_POS.y});
                 
-                this.currentWp = 0; this.speed = 0.8;
+                this.currentWp = 0; 
                 this.angle = 0; this.turretAngle = 0;
                 
-                this.attackRange = 450; this.damage = 60 * difficultyMultiplier;
-                this.lastShot = 0; this.lastHealTime = 0; this.fireRate = 800; 
+                this.lastShot = 0; this.lastHealTime = 0; 
                 this.isMobile = true; this.treadOffset = 0;
 
                 this.skills = {
@@ -2684,7 +2749,14 @@
 
                 drawChamferedRect(ctx, -this.width/2, -this.height/2, this.width, this.height, 15, null, null);
                 let hullGrad = ctx.createLinearGradient(-this.width/2, -this.height/2, this.width/2, this.height/2);
-                hullGrad.addColorStop(0, '#3d3d3d'); hullGrad.addColorStop(1, '#1e1111');
+                
+                // เปลี่ยนสีตัวถังถ้าเป็นรุ่นวิ่งเร็ว (Fast) ให้เป็นสีส้ม/ทองแดง
+                if (this.bossType === 'fast') {
+                    hullGrad.addColorStop(0, '#e67e22'); hullGrad.addColorStop(1, '#d35400');
+                } else {
+                    hullGrad.addColorStop(0, '#3d3d3d'); hullGrad.addColorStop(1, '#1e1111');
+                }
+                
                 ctx.fillStyle = hullGrad; ctx.fill();
                 ctx.strokeStyle = '#ff4757'; ctx.lineWidth = 1; ctx.stroke();
                 
@@ -3058,6 +3130,7 @@
             document.getElementById('multiMenu').style.display = 'none';
             document.getElementById('lobbyMenu').style.display = 'none';
             document.getElementById('shopUI').style.display = 'flex';
+            document.getElementById('topStatsHUD').style.display = 'flex'; // แสดง HUD ด้านบนตลอดเวลา
             document.getElementById('skillsUI').style.display = 'flex'; 
             document.getElementById('gameMessage').style.display = 'none';
             document.getElementById('miniMap').style.display = 'block';
@@ -3092,7 +3165,7 @@
             currentWeaponIndex = 0;
             cameraZoom = 1.0;
             
-            shopCosts = { damage: 100, hp: 100, skill: 100 };
+            shopCosts = { damage: 200, hp: 200, skill: 200 };
             shopLevels = { damage: 0, hp: 0, skill: 0 };
             skillPowerMult = 1.0;
             updateShopUI();
@@ -3138,14 +3211,20 @@
             let bossInitialLevel = Math.floor(10 * difficultyMultiplier);
             
             if (!isMultiplayer) {
-                // กำหนดเลนให้บอสทั้ง 5 ตัว (เลนบน 2, เลนกลาง 1, เลนล่าง 2)
-                let bossLanes = ['top', 'top', 'mid', 'bot', 'bot'];
+                // กำหนดเลนและประเภทให้บอส 5 ตัว (วิ่งช้า 3, วิ่งเร็ว 2)
+                let bossSetup = [
+                    { lane: 'top', type: 'heavy' }, // ตัวใหญ่ เลนบน
+                    { lane: 'top', type: 'fast' },  // ตัววิ่งเร็ว เลนบน
+                    { lane: 'mid', type: 'heavy' }, // ตัวใหญ่ เลนกลาง
+                    { lane: 'bot', type: 'heavy' }, // ตัวใหญ่ เลนล่าง
+                    { lane: 'bot', type: 'fast' }   // ตัววิ่งเร็ว เลนล่าง
+                ];
 
-                bossLanes.forEach(lane => {
+                bossSetup.forEach(b => {
                     let offsetX = (Math.random() - 0.5) * 200;
                     let offsetY = (Math.random() - 0.5) * 200;
-                    
-                    bosses.push(new BossTank(ENEMY_BASE_POS.x + offsetX, ENEMY_BASE_POS.y + offsetY, lane, 5000, bossInitialLevel));
+                    let hp = b.type === 'fast' ? 3500 : 5000; // บอสวิ่งเร็วเลือดน้อยกว่า
+                    bosses.push(new BossTank(ENEMY_BASE_POS.x + offsetX, ENEMY_BASE_POS.y + offsetY, b.lane, hp, bossInitialLevel, b.type));
                 });
             }
 
@@ -3229,6 +3308,10 @@
             document.getElementById('allyBaseHp').innerText = Math.floor(allyBase.hp);
             document.getElementById('enemyBaseHp').innerText = Math.floor(enemyBase.hp);
             document.getElementById('playerKills').innerText = tank.kills || 0;
+
+            // อัปเดตข้อมูลบน HUD ถาวร (Credits และ Kills ด้านบนซ้าย)
+            document.getElementById('hudGold').innerText = tank.gold;
+            document.getElementById('hudKills').innerText = tank.kills || 0;
 
             let allP = [{ name: myPlayerName + " (คุณ)", level: tank.level, kills: tank.kills || 0, team: myTeam }];
             Object.values(networkPlayers).forEach(np => {
