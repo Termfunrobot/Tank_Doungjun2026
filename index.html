@@ -427,29 +427,31 @@
 </head>
 <body>
 
-    <!-- หน้าปกเกม -->
     <div id="coverScreen">
         <h1>MARTIAN WAR RUINS</h1>
         <p>สงครามสมรภูมิหุ่นรบ</p>
         <button id="btnEnterMenu">🚀 START GAME</button>
     </div>
 
-    <!-- เมนูหลัก -->
     <div id="mainMenu">
         <h1>MARTIAN WAR RUINS</h1>
         <div class="menu-box">
             <label for="playerNameInput">ชื่อผู้บัญชาการ (Name):</label>
             <input type="text" id="playerNameInput" placeholder="ระบุชื่อของคุณ..." maxlength="15">
 
-            <button id="btnGotoSolo" style="margin-top: 20px;">👤 เล่นคนเดียว (SOLO)</button>
+            <div id="mainMenuTop5" style="display: none; background: rgba(0,0,0,0.5); border: 1px solid #f1c40f; padding: 10px; border-radius: 5px; margin-top: 15px; margin-bottom: 20px; text-align: left;">
+                <h4 style="color: #f1c40f; margin: 0 0 10px 0; text-align: center;">🏆 TOP 5 COMMANDERS</h4>
+                <div id="mainMenuTop5List" style="color: white; font-size: 0.9em; line-height: 1.5;">กำลังโหลด...</div>
+            </div>
+
+            <button id="btnGotoSolo" style="margin-top: 10px;">👤 เล่นคนเดียว (SOLO)</button>
             <button id="btnGotoMulti" class="multiplayer-btn" style="margin-top: 15px;">🌐 ผู้เล่นหลายคน (MULTIPLAYER)</button>
             
             <hr style="border-color: #333; margin: 25px 0;">
-            <button id="btnGotoHighscore" style="background: linear-gradient(45deg, #f1c40f, #f39c12); color: #000; box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);">🏆 หอเกียรติยศ (TOP 5)</button>
+            <button id="btnGotoHighscore" style="background: linear-gradient(45deg, #f1c40f, #f39c12); color: #000; box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);">🏆 หอเกียรติยศ (TOP 20)</button>
         </div>
     </div>
 
-    <!-- เมนูเล่นคนเดียว -->
     <div id="soloMenu">
         <h1>SOLO OPERATION</h1>
         <div class="menu-box">
@@ -465,7 +467,6 @@
             <h3 style="color: #ff4757; text-align: center; margin-top: 15px; border: 1px solid #ff4757; padding: 10px; border-radius: 5px; background: rgba(255, 71, 87, 0.1);">
                 ⚠️ โหมดสุดโหด (บอส 5 ตัว)
             </h3>
-            <!-- ซ่อนค่า 1.5 (ระดับยาก) ไว้เพื่อให้ระบบดึงไปใช้คำนวณดาเมจ/เลือดต่อ -->
             <input type="hidden" id="diffSelect" value="1.5">
             
             <button id="startSoloBtn" style="margin-top: 20px;">🚀 เริ่มปฏิบัติการ (START)</button>
@@ -473,7 +474,6 @@
         </div>
     </div>
 
-    <!-- เมนูผู้เล่นหลายคน -->
     <div id="multiMenu">
         <h1>MULTIPLAYER</h1>
         <div class="menu-box">
@@ -502,7 +502,6 @@
         </div>
     </div>
 
-    <!-- หน้าต่าง Lobby -->
     <div id="lobbyMenu">
         <h1>OPERATION ROOM</h1>
         <div class="menu-box">
@@ -520,7 +519,6 @@
                 </div>
             </div>
 
-            <!-- ส่วนควบคุมบอท (เฉพาะ Host) -->
             <div id="botControls" style="display: none; margin-bottom: 20px; border-top: 1px solid #333; padding-top: 15px; text-align: left;">
                 <h4 style="color: #fff; margin-bottom: 10px; margin-top: 0;">🤖 ตั้งค่าบอท (HOST ONLY)</h4>
                 <div style="display: flex; gap: 10px;">
@@ -547,11 +545,10 @@
         </div>
     </div>
 
-    <!-- เมนู High Score -->
     <div id="highscoreMenu">
         <h1>HALL OF FAME</h1>
         <div class="menu-box">
-            <h2 style="color: #f1c40f; margin-bottom: 20px; text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);">🏆 TOP 5 COMMANDERS</h2>
+            <h2 style="color: #f1c40f; margin-bottom: 20px; text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);">🏆 TOP 20 COMMANDERS</h2>
             <div id="highscoreList" style="text-align: left; color: white; margin-bottom: 25px; font-size: 1.2em; line-height: 2;">
                 กำลังโหลดข้อมูล...
             </div>
@@ -559,7 +556,6 @@
         </div>
     </div>
 
-    <!-- UI ร้านค้า (Armory Shop) -->
     <div id="shopUI">
         <span style="color: #f1c40f; font-weight: bold; font-size: 0.9em;">🛒 ARMORY:</span>
         <button id="btnUpgradeDamage" class="shop-btn">⚔️ DMG (+25%)<br><span id="costDamage" class="shop-cost">200</span> CR</button>
@@ -576,7 +572,6 @@
         <div class="stat" style="color: #3498db; margin-top: 10px;">TIME SCORE: <span id="timeScoreDisplay">3600</span></div>
     </div>
 
-    <!-- แสดง Credits และ Kills ตลอดเวลาบนหน้าจอด้านซ้าย (ใต้ MiniMap) -->
     <div id="topStatsHUD">
         <div class="stat gold-text" style="margin: 0; text-shadow: 1px 1px 2px #000;">CREDITS: <span id="hudGold">0</span></div>
         <div class="stat kill-text" style="margin: 0; text-shadow: 1px 1px 2px #000;">KILLS: <span id="hudKills">0</span></div>
@@ -587,7 +582,6 @@
         <div class="base-hp enemy-base">ENEMY HQ: <span id="enemyBaseHp">10000</span></div>
     </div>
 
-    <!-- ส่วนแสดง Leaderboard ในเกม -->
     <div id="leaderboardUI">
         <h3 style="margin: 0 0 10px 0; color: #f1c40f; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">🏆 BATTLE RANKING</h3>
         <div id="leaderboardList"></div>
@@ -595,12 +589,10 @@
 
     <div class="weapon-ui" id="weaponUI">SYS: AUTO-WEAPON | REPAIR READY</div>
 
-    <!-- คันโยก (Joystick) -->
     <div id="joystickZone">
         <div id="joystickKnob"></div>
     </div>
 
-    <!-- ปุ่มสกิลใหญ่ และปุ่มฮีล -->
     <div class="skills-ui" id="skillsUI">
         <div class="skill-box" id="skillHeal">
             <div class="skill-key" id="keyHealText">Space</div>
@@ -626,12 +618,10 @@
 
     <div id="gameMessage"></div>
 
-    <!-- ปุ่มตั้งค่า (Settings) และปุ่ม Fullscreen -->
     <button id="btnFullscreen">🔲 FULLSCREEN</button>
     <button id="btnSettings">⚙️ SETTINGS</button>
     <button id="btnToggleUI">👁️ SHOW UI</button>
 
-    <!-- เมนูตั้งค่า (Settings Modal) -->
     <div id="settingsMenu" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(5px);">
         <div class="menu-box" style="min-width: 400px; z-index: 3001;">
             <h2 style="color: #ff7f50; margin-bottom: 20px;">⚙️ GAME SETTINGS</h2>
@@ -668,7 +658,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getDatabase, ref, set, get, update, onValue } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+        import { getDatabase, ref, set, push, get, update, onValue } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
         // Cover Screen Event
         document.getElementById('btnEnterMenu').addEventListener('click', () => {
@@ -705,7 +695,7 @@
             document.getElementById('mainMenu').style.display = 'flex';
         });
 
-        // --- ระบบดึง High Score และแสดงผล (เชื่อมต่อฐานข้อมูลเฉพาะเมื่อเปิดหน้านี้) ---
+        // --- ระบบดึง High Score และแสดงผล ---
         document.getElementById('btnGotoHighscore').addEventListener('click', async () => {
             document.getElementById('mainMenu').style.display = 'none';
             document.getElementById('highscoreMenu').style.display = 'flex';
@@ -722,9 +712,14 @@
                 let html = '';
                 
                 if (snap.exists()) {
-                    let scores = snap.val();
+                    let rawData = snap.val();
+                    let scores = Object.values(rawData);
+                    
                     // เรียงคะแนนจากมากไปน้อย (Time Score ยิ่งเหลือเยอะยิ่งเก่ง)
                     scores.sort((a, b) => b.score - a.score);
+                    
+                    // จำกัดเอาแค่ 20 อันดับแรก
+                    scores = scores.slice(0, 20);
                     
                     scores.forEach((s, i) => {
                         let color = i === 0 ? '#f1c40f' : (i === 1 ? '#bdc3c7' : (i === 2 ? '#cd7f32' : '#fff'));
@@ -769,6 +764,35 @@
         
         let networkPlayers = {};
 
+        // ฟังก์ชันดึง Top 5 มาแสดงในเมนูหลัก
+        function fetchMainMenuTop5() {
+            if (!db) return;
+            const hsRef = ref(db, `highscores/solo`);
+            get(hsRef).then(snap => {
+                if (snap.exists()) {
+                    let rawData = snap.val();
+                    let scores = Object.values(rawData);
+                    
+                    scores.sort((a, b) => b.score - a.score);
+                    let html = '';
+                    let top5 = scores.slice(0, 5); 
+                    top5.forEach((s, i) => {
+                        let trophy = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : '🎖️'));
+                        html += `
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.2); margin-bottom: 4px; padding-bottom: 4px;">
+                                <span>${trophy} #${i+1} <strong>${s.name}</strong></span> 
+                                <span style="color: #f1c40f;">${s.score} PTS</span>
+                            </div>`;
+                    });
+                    document.getElementById('mainMenuTop5List').innerHTML = html;
+                    document.getElementById('mainMenuTop5').style.display = 'block';
+                } else {
+                    document.getElementById('mainMenuTop5List').innerHTML = '<div style="text-align: center; color: #aaa;">ยังไม่มีสถิติผู้เล่น</div>';
+                    document.getElementById('mainMenuTop5').style.display = 'block';
+                }
+            }).catch(e => console.error(e));
+        }
+
         // โหลด Firebase ตั้งต้นแบบ Lazy-Sign-In เพื่อลดภาระ (ยังไม่มีการ Sync ข้อมูลใดๆ จนกว่าจะเริ่ม Multiplayer)
         const initFirebase = async () => {
             try {
@@ -805,6 +829,9 @@
                         
                         document.getElementById('multiplayerGroup').style.display = 'block';
                         document.getElementById('loadingText').style.display = 'none';
+
+                        // เรียกใช้ฟังก์ชันดึง Top 5 ทันทีที่เชื่อมต่อ Firebase สำเร็จ
+                        fetchMainMenuTop5();
                     }
                 });
 
@@ -1295,26 +1322,30 @@
             let countdown = 30;
             let myTeamWon = (losingTeam !== myTeam);
             
-            // คำนวณคะแนนเวลาที่เหลือ
+            // คำนวณคะแนนเวลาที่เหลือ (หักวินาทีละ 2 คะแนน)
             let elapsedSec = Math.floor((Date.now() - gameStartTime) / 1000);
-            let finalTimeScore = Math.max(0, 3600 - elapsedSec);
+            let finalTimeScore = Math.max(0, 3600 - (elapsedSec * 2));
             
             let baseText = myTeamWon ? 'MISSION ACCOMPLISHED' : 'CRITICAL FAILURE';
             let color = myTeamWon ? '#00d2d3' : '#ff4757';
             
             let scoreText = myTeamWon ? `<br><span style="font-size: 0.6em; color: #f1c40f; text-shadow: 0 0 10px #f1c40f;">TIME SCORE: ${finalTimeScore}</span>` : '';
             
-            // บันทึก Highscore เฉพาะโหมด Solo ที่ชนะ (จะทำเมื่อจบเกมเพื่อไม่ให้หน่วงระหว่างเล่น)
+            // บันทึก Highscore เฉพาะโหมด Solo ที่ชนะ แบบปลอดภัยป้องกันคนแก้คะแนนมั่ว
             if (myTeamWon && !isMultiplayer && db) {
                 const hsRef = ref(db, `highscores/solo`);
-                get(hsRef).then(snap => {
-                    let scores = snap.exists() ? snap.val() : [];
-                    scores.push({ name: myPlayerName, score: finalTimeScore });
-                    // จัดเรียงจากคะแนนมากไปน้อย
-                    scores.sort((a, b) => b.score - a.score);
-                    // เก็บไว้แค่ 5 อันดับแรก
-                    scores = scores.slice(0, 5);
-                    set(hsRef, scores);
+                
+                // สร้างสมการลับ (Token) ให้ตรงกับที่ตั้งไว้ใน Firebase Rules
+                let secretToken = (finalTimeScore * 7) + 123;
+
+                // ใช้ push เพื่อแปะข้อมูลใหม่เข้าไป โดยไม่ยุ่งกับข้อมูลคนอื่น
+                push(hsRef, { 
+                    name: myPlayerName, 
+                    score: finalTimeScore,
+                    token: secretToken, // ส่งรหัสลับไปยืนยัน
+                    timestamp: Date.now()
+                }).then(() => {
+                    fetchMainMenuTop5(); 
                 }).catch(e => console.error("Failed to save highscore", e));
 
                 scoreText += `<br><span style="font-size: 0.4em; color: #2ecc71;">(บันทึกสถิติขึ้นสู่ระบบแล้ว)</span>`;
@@ -1388,6 +1419,53 @@
             
             if(fillStyle) { ctx.fillStyle = fillStyle; ctx.fill(); }
             if(strokeStyle) { ctx.strokeStyle = strokeStyle; ctx.lineWidth = 2; ctx.stroke(); }
+        }
+
+        // คลาสใหม่สำหรับรอยไหม้บนพื้น (ScorchMark)
+        class ScorchMark {
+            constructor(x, y, radius) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.life = 1.0;
+                this.points = [];
+                // สร้างขอบรอยไหม้แบบขรุขระ (Randomized jagged edges)
+                let numPoints = 12 + Math.floor(Math.random() * 8);
+                for (let i = 0; i < numPoints; i++) {
+                    let angle = (i / numPoints) * Math.PI * 2;
+                    let r = radius * (0.6 + Math.random() * 0.4);
+                    this.points.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
+                }
+            }
+            update() {
+                // จางลงอย่างช้าๆ (ลดลง 0.0005 ต่อเฟรม = อยู่ได้ประมาณ 33 วินาทีที่ 60fps)
+                this.life -= 0.0005; 
+            }
+            draw(ctx) {
+                if (this.life <= 0) return;
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                
+                // ขอบรอยไหม้ด้านนอกสีเทาเข้ม
+                ctx.globalAlpha = Math.max(0, this.life * 0.8);
+                ctx.fillStyle = '#0a0a0a';
+                ctx.beginPath();
+                ctx.moveTo(this.points[0].x, this.points[0].y);
+                for (let i = 1; i < this.points.length; i++) {
+                    ctx.lineTo(this.points[i].x, this.points[i].y);
+                }
+                ctx.closePath();
+                ctx.fill();
+
+                // หลุมตรงกลางที่ไหม้เกรียมเป็นสีดำสนิท
+                ctx.globalAlpha = Math.max(0, this.life * 0.9);
+                ctx.fillStyle = '#000000';
+                ctx.beginPath();
+                ctx.arc(0, 0, this.radius * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
         }
 
         class Entity {
@@ -1534,6 +1612,9 @@
                 this.lastDamageTime = Date.now();
                 SoundFX.playTone(50, 'sawtooth', 2.0, 0.3, 20); 
                 this.dealDamage(allEntities, this.damage);
+                
+                // สร้างรอยไหม้ขนาดใหญ่เมื่อเกิดการระเบิด
+                scorchMarks.push(new ScorchMark(this.x, this.y, this.radius * 0.8));
 
                 for(let i=0; i<80; i++) {
                     let angle = Math.random() * Math.PI * 2;
@@ -1558,6 +1639,9 @@
                                 floatingTexts.push(new FloatingText(ent.x, ent.y, `-${Math.floor(dmgAmount)}`, "#e74c3c"));
                                 if (ent.hp <= 0) {
                                     ent.hp = 0; ent.isActive = false;
+                                    // สร้างรอยไหม้เวลายูนิตถูกทำลาย
+                                    scorchMarks.push(new ScorchMark(ent.x, ent.y, ent.radius * 2));
+                                    
                                     if (ent instanceof Base) handleGameOver(ent.team);
                                     else if (ent instanceof Tank) handleTankDeath(ent);
                                     else if (ent instanceof BossTank) handleBossDeath(ent);
@@ -2530,19 +2614,40 @@
                     ctx.restore();
                 }
 
-                this.drawHealthBar(ctx, 45);
+                // --- วาดหลอดเลือดของฮีโร่ให้ใหญ่และชัดเจนขึ้น ---
+                const hpWidth = 80;
+                const hpHeight = 10;
+                const hpY = this.y - this.radius - 35;
+                const hpPercent = Math.max(0, this.hp / this.maxHp);
                 
-                ctx.shadowBlur = 2; ctx.shadowColor = '#000';
-                ctx.fillStyle = (this.team === myTeam) ? '#2ecc71' : '#ff4757'; 
+                ctx.fillStyle = 'rgba(0,0,0,0.8)';
+                ctx.fillRect(this.x - hpWidth/2, hpY, hpWidth, hpHeight);
+                ctx.strokeStyle = '#111';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(this.x - hpWidth/2, hpY, hpWidth, hpHeight);
+                
+                let hpColor = (this.team === myTeam) ? '#00d2d3' : '#ff4757';
+                if (!this.isTeammate) hpColor = '#2ecc71'; // สีเขียวสว่างสำหรับตัวเราเอง
+                
+                ctx.fillStyle = hpColor;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = hpColor;
+                ctx.fillRect(this.x - hpWidth/2, hpY, hpWidth * hpPercent, hpHeight);
+                ctx.shadowBlur = 0;
+                
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                for(let i=1; i<=4; i++) {
+                    ctx.fillRect(this.x - hpWidth/2 + (hpWidth * (i/5)) - 1, hpY, 2, hpHeight);
+                }
+                
+                // --- วาดชื่อและเลเวล ---
+                ctx.shadowBlur = 4; ctx.shadowColor = '#000';
+                ctx.fillStyle = (this.team === myTeam) ? '#00d2d3' : '#ff4757'; 
                 if(!this.isTeammate) ctx.fillStyle = '#fff';
 
                 ctx.font = 'bold 16px "Segoe UI"'; ctx.textAlign = 'center';
                 let tag = this.isTeammate ? `[${this.playerName}] LV.${this.level}` : `[${myPlayerName}] LV.${this.level}`;
-                ctx.fillText(tag, this.x, this.y - this.radius - 50);
-
-                ctx.fillStyle = '#e74c3c';
-                ctx.font = 'bold 12px "Segoe UI"';
-                ctx.fillText(`KILLS: ${this.kills || 0}`, this.x, this.y - this.radius - 35);
+                ctx.fillText(tag, this.x, this.y - this.radius - 45);
             }
         }
 
@@ -2794,31 +2899,61 @@
             }
         }
 
-        class TechDebris {
-            constructor(x, y) {
-                this.x = x; this.y = y;
-                this.radius = 25 + Math.random() * 25; 
-                this.type = Math.floor(Math.random() * 3);
-                this.angle = Math.random() * Math.PI * 2;
+        // คลาสใหม่สำหรับกำแพงที่ทะลุไม่ได้ (บล็อกการเคลื่อนที่และกระสุน)
+        class MapWall {
+            constructor(x, y, w, h) {
+                this.x = x; this.y = y; this.w = w; this.h = h;
             }
-            draw() {
+            draw(ctx) {
                 ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
+                ctx.shadowBlur = 15; ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                drawChamferedRect(ctx, this.x, this.y, this.w, this.h, 15, '#1e272e', '#111');
                 
-                if (this.type === 0) { 
-                    // ซากกำแพงคอนกรีตไหม้
-                    drawChamferedRect(ctx, -25, -25, 50, 50, 5, '#5c433b', '#2a1a15');
-                    ctx.fillStyle = '#111'; ctx.fillRect(-10, -10, 20, 20);
-                } else if (this.type === 1) { 
-                    // โครงเหล็กสนิมเขรอะ
-                    drawMetallicRect(ctx, -35, -15, 70, 30, '#8b4513', '#3e1f10');
-                    ctx.fillStyle = '#111'; ctx.beginPath(); ctx.arc(-30, 0, 10, 0, Math.PI*2); ctx.fill();
-                } else { 
-                    // หินดาวอังคารก้อนใหญ่
-                    ctx.fillStyle = '#a0522d';
-                    ctx.beginPath(); ctx.moveTo(-30, -20); ctx.lineTo(30, 0); ctx.lineTo(-10, 35); ctx.fill(); ctx.stroke();
+                ctx.shadowBlur = 0;
+                drawMetallicRect(ctx, this.x + 10, this.y + 10, this.w - 20, this.h - 20, '#2f3640', '#111');
+                
+                // ลวดลายไฟนีออนบนกำแพง
+                ctx.strokeStyle = 'rgba(231, 76, 60, 0.4)'; // สีแดงเท่ๆ
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(this.x + 15, this.y + 20);
+                ctx.lineTo(this.x + 15 + (this.w > 100 ? 50 : 20), this.y + 20);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(this.x + this.w - 15, this.y + this.h - 20);
+                ctx.lineTo(this.x + this.w - 15 - (this.w > 100 ? 50 : 20), this.y + this.h - 20);
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
+        // คลาสใหม่สำหรับพุ่มไม้พรางตัวโฮโลแกรม (เดินผ่านได้ ซ่อนตัวได้)
+        class StealthBush {
+            constructor(x, y, w, h) {
+                this.x = x; this.y = y; this.w = w; this.h = h;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.fillStyle = 'rgba(46, 204, 113, 0.1)';
+                ctx.strokeStyle = 'rgba(46, 204, 113, 0.4)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([10, 10]);
+                drawChamferedRect(ctx, this.x, this.y, this.w, this.h, 15, ctx.fillStyle, ctx.strokeStyle);
+                
+                ctx.setLineDash([]);
+                ctx.fillStyle = 'rgba(46, 204, 113, 0.3)';
+                for (let i = this.x + 20; i < this.x + this.w - 10; i += 40) {
+                    for (let j = this.y + 20; j < this.y + this.h - 10; j += 40) {
+                        ctx.fillRect(i, j, 4, 4);
+                    }
                 }
+                
+                ctx.fillStyle = 'rgba(46, 204, 113, 0.5)';
+                ctx.font = 'bold 12px "Segoe UI"';
+                ctx.textAlign = 'center';
+                ctx.fillText("STEALTH FIELD", this.x + this.w/2, this.y + this.h/2);
                 ctx.restore();
             }
         }
@@ -2846,7 +2981,7 @@
                 }
             }
 
-            // ตรวจสอบการชนกันระหว่างตัวละครที่เคลื่อนที่ได้ กับ สิ่งก่อสร้าง (ป้อม/ฐาน)
+            // ตรวจสอบการชนกันระหว่างตัวละคร กับ สิ่งก่อสร้าง (ป้อม/ฐาน)
             for (let i = 0; i < mobiles.length; i++) {
                 for (let j = 0; j < statics.length; j++) {
                     let m = mobiles[i]; let s = statics[j];
@@ -2861,6 +2996,37 @@
                         let nx = dx / dist; let ny = dy / dist;
                         m.x += nx * overlap; 
                         m.y += ny * overlap;
+                    }
+                }
+            }
+
+            // ระบบ AABB Collision สำหรับกำแพงแผนที่ (MapWall) 
+            for (let i = 0; i < mobiles.length; i++) {
+                for (let j = 0; j < mapWalls.length; j++) {
+                    let m = mobiles[i]; let w = mapWalls[j];
+                    
+                    let testX = m.x;
+                    let testY = m.y;
+
+                    if (m.x < w.x) testX = w.x;
+                    else if (m.x > w.x + w.w) testX = w.x + w.w;
+
+                    if (m.y < w.y) testY = w.y;
+                    else if (m.y > w.y + w.h) testY = w.y + w.h;
+
+                    let distX = m.x - testX;
+                    let distY = m.y - testY;
+                    let distanceSq = (distX*distX) + (distY*distY);
+
+                    if (distanceSq < m.radius * m.radius) {
+                        let distance = Math.sqrt(distanceSq);
+                        if (distance === 0) {
+                            m.y -= m.radius; 
+                        } else {
+                            let overlap = m.radius - distance;
+                            m.x += (distX / distance) * overlap;
+                            m.y += (distY / distance) * overlap;
+                        }
                     }
                 }
             }
@@ -2886,9 +3052,9 @@
         }
 
         let allyBase, enemyBase, tank;
-        let turrets = [], minions = [], bosses = [], projectiles = [], bushes = [], particles = [], clickIndicators = [], floatingTexts = [], artilleryStrikes = [];
+        let turrets = [], minions = [], bosses = [], projectiles = [], mapWalls = [], stealthBushes = [], particles = [], clickIndicators = [], floatingTexts = [], artilleryStrikes = [], scorchMarks = [];
         let spawnerInterval;
-        let gameStartTime = 0; // ตัวแปรเก็บเวลาเริ่มเกม
+        let gameStartTime = 0; 
 
         document.getElementById('startSoloBtn').addEventListener('click', () => {
             updatePlayerName();
@@ -3130,7 +3296,7 @@
             document.getElementById('multiMenu').style.display = 'none';
             document.getElementById('lobbyMenu').style.display = 'none';
             document.getElementById('shopUI').style.display = 'flex';
-            document.getElementById('topStatsHUD').style.display = 'flex'; // แสดง HUD ด้านบนตลอดเวลา
+            document.getElementById('topStatsHUD').style.display = 'flex'; 
             document.getElementById('skillsUI').style.display = 'flex'; 
             document.getElementById('gameMessage').style.display = 'none';
             document.getElementById('miniMap').style.display = 'block';
@@ -3160,7 +3326,7 @@
                 new Turret(2700, 2000, 'enemy'), new Turret(2700, 1400, 'enemy'), new Turret(2700, 800, 'enemy')
             ];
 
-            minions = []; bosses = []; projectiles = []; bushes = []; particles = []; clickIndicators = []; floatingTexts = []; artilleryStrikes = [];
+            minions = []; bosses = []; projectiles = []; mapWalls = []; stealthBushes = []; particles = []; clickIndicators = []; floatingTexts = []; artilleryStrikes = []; scorchMarks = [];
             networkPlayers = {}; 
             currentWeaponIndex = 0;
             cameraZoom = 1.0;
@@ -3170,26 +3336,36 @@
             skillPowerMult = 1.0;
             updateShopUI();
 
-            const laneSegments = [
-                {v: {x:ALLY_BASE_POS.x, y:ALLY_BASE_POS.y}, w: {x:ENEMY_BASE_POS.x, y:ENEMY_BASE_POS.y}}, 
-                {v: {x:ALLY_BASE_POS.x, y:ALLY_BASE_POS.y}, w: {x:300, y:300}},  
-                {v: {x:300, y:300}, w: {x:ENEMY_BASE_POS.x, y:ENEMY_BASE_POS.y}},  
-                {v: {x:ALLY_BASE_POS.x, y:ALLY_BASE_POS.y}, w: {x:2700, y:2700}}, 
-                {v: {x:2700, y:2700}, w: {x:ENEMY_BASE_POS.x, y:ENEMY_BASE_POS.y}}  
+            // เลย์เอาต์แผนที่แบบตายตัว (Fixed Map Design) - สมมาตร 100%
+            mapWalls = [
+                // ป่าบนซ้าย (Top-Left Jungle)
+                new MapWall(800, 1200, 200, 400),
+                new MapWall(1200, 800, 400, 200),
+                new MapWall(1150, 1150, 150, 150),
+                new MapWall(450, 1200, 150, 600), // แนวกั้นเลน
+                new MapWall(1200, 450, 600, 150), // แนวกั้นเลน
+
+                // ป่าล่างขวา (Bot-Right Jungle)
+                new MapWall(2000, 1400, 200, 400),
+                new MapWall(1400, 2000, 400, 200),
+                new MapWall(1700, 1700, 150, 150),
+                new MapWall(2400, 1200, 150, 600), // แนวกั้นเลน
+                new MapWall(1200, 2400, 600, 150)  // แนวกั้นเลน
             ];
 
-            while(bushes.length < 300) { 
-                let bx = Math.random() * MAP_SIZE;
-                let by = Math.random() * MAP_SIZE;
-                let isNearLane = false;
-                for (let seg of laneSegments) {
-                    if (distToSegment({x:bx, y:by}, seg.v, seg.w) < 160) { isNearLane = true; break; }
-                }
-                if (Math.hypot(bx - ALLY_BASE_POS.x, by - ALLY_BASE_POS.y) < 500) isNearLane = true;
-                if (Math.hypot(bx - ENEMY_BASE_POS.x, by - ENEMY_BASE_POS.y) < 500) isNearLane = true;
+            // ทุ่งโฮโลแกรมสำหรับซุ่ม (Stealth Bushes)
+            stealthBushes = [
+                new StealthBush(1300, 1300, 400, 400), // จุดปะทะกลางแม่น้ำ
                 
-                if (!isNearLane) bushes.push(new TechDebris(bx, by));
-            }
+                new StealthBush(800, 1700, 300, 200), // ซุ่มข้างกลาง (ฝั่งล่าง)
+                new StealthBush(1900, 1100, 300, 200), // ซุ่มข้างกลาง (ฝั่งบน)
+                
+                new StealthBush(600, 600, 300, 300),   // ป่าลึกซ้ายบน
+                new StealthBush(2100, 2100, 300, 300), // ป่าลึกขวาล่าง
+                
+                new StealthBush(800, 2300, 250, 150),  // ซุ่มขอบเลนล่าง
+                new StealthBush(1950, 550, 250, 150)   // ซุ่มขอบเลนบน
+            ];
 
             if (spawnerInterval) clearInterval(spawnerInterval);
             
@@ -3211,24 +3387,23 @@
             let bossInitialLevel = Math.floor(10 * difficultyMultiplier);
             
             if (!isMultiplayer) {
-                // กำหนดเลนและประเภทให้บอส 5 ตัว (วิ่งช้า 3, วิ่งเร็ว 2)
                 let bossSetup = [
-                    { lane: 'top', type: 'heavy' }, // ตัวใหญ่ เลนบน
-                    { lane: 'top', type: 'fast' },  // ตัววิ่งเร็ว เลนบน
-                    { lane: 'mid', type: 'heavy' }, // ตัวใหญ่ เลนกลาง
-                    { lane: 'bot', type: 'heavy' }, // ตัวใหญ่ เลนล่าง
-                    { lane: 'bot', type: 'fast' }   // ตัววิ่งเร็ว เลนล่าง
+                    { lane: 'top', type: 'heavy' }, 
+                    { lane: 'top', type: 'fast' },  
+                    { lane: 'mid', type: 'heavy' }, 
+                    { lane: 'bot', type: 'heavy' }, 
+                    { lane: 'bot', type: 'fast' }   
                 ];
 
                 bossSetup.forEach(b => {
                     let offsetX = (Math.random() - 0.5) * 200;
                     let offsetY = (Math.random() - 0.5) * 200;
-                    let hp = b.type === 'fast' ? 3500 : 5000; // บอสวิ่งเร็วเลือดน้อยกว่า
+                    let hp = b.type === 'fast' ? 3500 : 5000; 
                     bosses.push(new BossTank(ENEMY_BASE_POS.x + offsetX, ENEMY_BASE_POS.y + offsetY, b.lane, hp, bossInitialLevel, b.type));
                 });
             }
 
-            gameStartTime = Date.now(); // บันทึกเวลาเริ่มเกม
+            gameStartTime = Date.now(); 
             if(!isMultiplayer) showMessage(`SYSTEM ONLINE`, '#00d2d3', 3000);
             else showMessage(`OPERATION COMMENCED`, '#00d2d3', 3000);
             gameState = 'PLAYING';
@@ -3257,6 +3432,21 @@
         function handleCollisions(allEntities) {
             projectiles.forEach(p => {
                 if(!p.isActive) return;
+
+                // เช็คการชนกำแพงแผนที่ก่อน (เพื่อบล็อกกระสุนและใช้หลบได้)
+                let hitWall = false;
+                for (let w of mapWalls) {
+                    if (p.x > w.x && p.x < w.x + w.w && p.y > w.y && p.y < w.y + w.h) {
+                        hitWall = true;
+                        break;
+                    }
+                }
+                if (hitWall) {
+                    p.isActive = false;
+                    for(let i=0; i<4; i++) particles.push(new Smoke(p.x, p.y, true)); // กระสุนแตกใส่กำแพง
+                    return; // ข้ามไปกระสุนนัดถัดไป
+                }
+
                 for (let ent of allEntities) {
                     if (p.team !== ent.team && ent.isActive && ent.hp > 0) {
                         if (p.isPiercing && p.hitTargets.includes(ent)) continue;
@@ -3277,8 +3467,14 @@
                                 if (!p.isPiercing) p.isActive = false; 
                                 break; 
                             } else {
-                                ent.hp -= p.damage;
-                                floatingTexts.push(new FloatingText(ent.x, ent.y, `-${Math.floor(p.damage)}`, "#e74c3c"));
+                                let finalDamage = p.damage;
+                                
+                                if (p.isTurretShot && ent instanceof Minion) {
+                                    finalDamage = finalDamage * 0.15; 
+                                }
+
+                                ent.hp -= finalDamage;
+                                floatingTexts.push(new FloatingText(ent.x, ent.y, `-${Math.floor(finalDamage)}`, "#e74c3c"));
                                 
                                 for(let i=0; i<3; i++) particles.push(new BuffParticle(p.x, p.y, p.color));
 
@@ -3287,6 +3483,9 @@
                                 
                                 if (ent.hp <= 0) {
                                     ent.hp = 0; ent.isActive = false;
+                                    // สร้างรอยไหม้เวลายูนิตถูกทำลาย
+                                    scorchMarks.push(new ScorchMark(ent.x, ent.y, ent.radius * 2));
+                                    
                                     if (ent instanceof Base) handleGameOver(ent.team);
                                     else if (ent instanceof Tank) handleTankDeath(ent); 
                                     else if (ent instanceof BossTank) handleBossDeath(ent);
@@ -3328,10 +3527,10 @@
 
             let now = Date.now();
 
-            // อัปเดตคะแนนเวลา (ลดลงวินาทีละ 1)
+            // อัปเดตคะแนนเวลา (ลดลงวินาทีละ 2 คะแนน)
             if (gameState === 'PLAYING') {
                 let elapsedSec = Math.floor((now - gameStartTime) / 1000);
-                let currentScore = Math.max(0, 3600 - elapsedSec);
+                let currentScore = Math.max(0, 3600 - (elapsedSec * 2));
                 let scoreEl = document.getElementById('timeScoreDisplay');
                 if(scoreEl) scoreEl.innerText = currentScore;
             }
@@ -3387,6 +3586,18 @@
                 mapCtx.beginPath(); mapCtx.moveTo(i, 0); mapCtx.lineTo(i, mapCanvas.height); mapCtx.stroke();
                 mapCtx.beginPath(); mapCtx.moveTo(0, i); mapCtx.lineTo(mapCanvas.width, i); mapCtx.stroke();
             }
+
+            // วาดกำแพงลง MiniMap
+            mapCtx.fillStyle = 'rgba(100, 100, 100, 0.5)';
+            mapWalls.forEach(w => {
+                mapCtx.fillRect(w.x * scale, w.y * scale, w.w * scale, w.h * scale);
+            });
+
+            // วาดพุ่มพรางตัวลง MiniMap
+            mapCtx.fillStyle = 'rgba(46, 204, 113, 0.3)';
+            stealthBushes.forEach(b => {
+                mapCtx.fillRect(b.x * scale, b.y * scale, b.w * scale, b.h * scale);
+            });
 
             turrets.forEach(t => {
                 if(!t.isActive) return;
@@ -3461,10 +3672,34 @@
 
                 drawMapLines();
 
-                bushes.forEach(b => {
-                    if (b.x > cameraX - 200 && b.x < cameraX + visibleWidth + 200 &&
-                        b.y > cameraY - 200 && b.y < cameraY + visibleHeight + 200) {
-                        b.draw();
+                // อัปเดตและวาดรอยไหม้บนพื้น (อยู่ใต้สุดของฉาก)
+                for (let i = scorchMarks.length - 1; i >= 0; i--) {
+                    scorchMarks[i].update();
+                    if (scorchMarks[i].life <= 0) {
+                        scorchMarks.splice(i, 1);
+                    } else {
+                        // เช็คให้อยู่ในระยะกล้องค่อยวาด เพื่อประหยัดทรัพยากร
+                        let s = scorchMarks[i];
+                        if (s.x + s.radius > cameraX - 200 && s.x - s.radius < cameraX + visibleWidth + 200 &&
+                            s.y + s.radius > cameraY - 200 && s.y - s.radius < cameraY + visibleHeight + 200) {
+                            s.draw(ctx);
+                        }
+                    }
+                }
+
+                // วาดทุ่งพรางตัว (Stealth Bushes)
+                stealthBushes.forEach(b => {
+                    if (b.x + b.w > cameraX - 200 && b.x < cameraX + visibleWidth + 200 &&
+                        b.y + b.h > cameraY - 200 && b.y < cameraY + visibleHeight + 200) {
+                        b.draw(ctx);
+                    }
+                });
+
+                // วาดกำแพงแผนที่ (Map Walls)
+                mapWalls.forEach(w => {
+                    if (w.x + w.w > cameraX - 200 && w.x < cameraX + visibleWidth + 200 &&
+                        w.y + w.h > cameraY - 200 && w.y < cameraY + visibleHeight + 200) {
+                        w.draw(ctx);
                     }
                 });
 
@@ -3491,20 +3726,16 @@
                         }
                     }
 
+                    // เช็คสถานะการพรางตัว (Stealth) ด้วยทุ่งโฮโลแกรมใหม่
                     allEntities.forEach(ent => {
                         if (ent.isMobile) {
                             ent.isStealth = false;
-                            for (let b of bushes) {
-                                if (Math.abs(ent.x - b.x) < b.radius + ent.radius && Math.abs(ent.y - b.y) < b.radius + ent.radius) {
-                                    let dx = ent.x - b.x; let dy = ent.y - b.y;
-                                    let stealthDist = b.radius + ent.radius * 0.3;
-                                    
-                                    if (dx*dx + dy*dy < stealthDist*stealthDist) {
-                                        if (!ent.lastShot || Date.now() - ent.lastShot > 1500) {
-                                            ent.isStealth = true;
-                                        }
-                                        break;
+                            for (let b of stealthBushes) {
+                                if (ent.x > b.x && ent.x < b.x + b.w && ent.y > b.y && ent.y < b.y + b.h) {
+                                    if (!ent.lastShot || Date.now() - ent.lastShot > 1500) {
+                                        ent.isStealth = true;
                                     }
+                                    break;
                                 }
                             }
                         }
@@ -3532,7 +3763,6 @@
                         });
                     }
                     
-                    // หากเล่นแบบ Multiplayer เท่านั้น ถึงจะทำการเขียนเรียลไทม์ลง Firebase เพื่อประหยัด CPU/Network
                     if (isMultiplayer && roomId) {
                         let now = Date.now();
                         if (now - lastSyncTime > 200) {
@@ -3636,6 +3866,7 @@
                                             turrets[idx].hp = hp;
                                             if (hp <= 0 && turrets[idx].isActive) {
                                                 turrets[idx].isActive = false;
+                                                scorchMarks.push(new ScorchMark(turrets[idx].x, turrets[idx].y, turrets[idx].radius * 2));
                                                 for(let i=0; i<15; i++) particles.push(new Smoke(turrets[idx].x, turrets[idx].y));
                                             }
                                         }
@@ -3660,6 +3891,7 @@
                                             bosses[idx].level = bData.level;
                                             
                                             if (bosses[idx].isActive && !bData.isActive) {
+                                                scorchMarks.push(new ScorchMark(bosses[idx].x, bosses[idx].y, bosses[idx].radius * 2));
                                                 for(let i=0; i<30; i++) particles.push(new Smoke(bosses[idx].x, bosses[idx].y));
                                                 SoundFX.death();
                                             }
@@ -3698,6 +3930,7 @@
                                         if (localM.isActive && !dbMinionIds.has(localM.id)) {
                                             localM.isActive = false;
                                             localM.hp = 0;
+                                            scorchMarks.push(new ScorchMark(localM.x, localM.y, localM.radius * 2));
                                             for(let i=0; i<15; i++) particles.push(new Smoke(localM.x, localM.y));
                                         }
                                     });
@@ -3706,6 +3939,7 @@
                                         if (localM.isActive) {
                                             localM.isActive = false;
                                             localM.hp = 0;
+                                            scorchMarks.push(new ScorchMark(localM.x, localM.y, localM.radius * 2));
                                             for(let i=0; i<15; i++) particles.push(new Smoke(localM.x, localM.y));
                                         }
                                     });
@@ -3739,6 +3973,7 @@
                                     np.targetTurretAngle = pData.turretAngle;
                                     
                                     if (np.isActive && pData.isActive === false) {
+                                        scorchMarks.push(new ScorchMark(np.x, np.y, np.radius * 2));
                                         for(let i=0; i<15; i++) particles.push(new Smoke(np.x, np.y));
                                         SoundFX.death();
                                     }
@@ -3877,16 +4112,21 @@
                     if (remaining > 0) {
                         ctx.save();
                         ctx.setTransform(1, 0, 0, 1, 0, 0); 
-                        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
+                        // เอาพื้นหลังสีดำทึบออก
+                        // ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                        // ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
                         ctx.fillStyle = '#ff4757';
                         ctx.font = 'bold 60px "Segoe UI"';
                         ctx.textAlign = 'center';
-                        ctx.shadowBlur = 20; ctx.shadowColor = '#ff4757';
+                        // เพิ่มเงาสีดำหนาๆ ให้ตัวหนังสือลอยเด่นขึ้นมาจากแผนที่
+                        ctx.shadowBlur = 15; ctx.shadowColor = '#000';
                         ctx.fillText('CRITICAL FAILURE', canvas.width/2, canvas.height/2 - 40);
+                        
                         ctx.fillStyle = '#fff';
                         ctx.font = 'bold 30px "Segoe UI"';
-                        ctx.shadowBlur = 0;
+                        ctx.shadowBlur = 10; ctx.shadowColor = '#000';
                         ctx.fillText(`REDEPLOYING IN: ${remaining}s`, canvas.width/2, canvas.height/2 + 20);
                         ctx.restore();
                     }
