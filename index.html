@@ -1804,10 +1804,9 @@
                 let maxH = 4000 * difficultyMultiplier; 
                 super(x, y, 40, team, maxH, maxH);
                 this.color = team === 'ally' ? '#00d2d3' : '#ff4757';
-                this.attackRange = 400;
+                this.attackRange = 650; // เพิ่มระยะยิงเป็น 650 (ฮีโร่ระยะยิง 500)
                 this.damage = 1000 * difficultyMultiplier; 
                 this.lastAttack = 0;
-                this.attackSpeed = 1000;
                 this.turretAngle = 0;
             }
 
@@ -1833,8 +1832,13 @@
                 if (nearestTarget) {
                     this.turretAngle = Math.atan2(nearestTarget.y - this.y, nearestTarget.x - this.x);
                     const now = Date.now();
-                    if (now - this.lastAttack > this.attackSpeed) {
-                        projectiles.push(new Projectile(this.x, this.y, this.turretAngle, this.team, 12, this.damage, this.color, true, true, false, this));
+                    
+                    let isMinion = nearestTarget instanceof Minion;
+                    let fireDelay = isMinion ? 1000 : 200; 
+                    let projDamage = isMinion ? this.damage : this.damage * 0.2; 
+
+                    if (now - this.lastAttack > fireDelay) {
+                        projectiles.push(new Projectile(this.x, this.y, this.turretAngle, this.team, 12, projDamage, this.color, true, true, false, this));
                         this.lastAttack = now;
                     }
                 }
@@ -3470,7 +3474,8 @@
                                 let finalDamage = p.damage;
                                 
                                 if (p.isTurretShot && ent instanceof Minion) {
-                                    finalDamage = finalDamage * 0.15; 
+                                    // ปรับให้คีปทนป้อมได้นานขึ้น 2 เท่า (ลดดาเมจที่ได้รับจากป้อมเหลือ 7.5%)
+                                    finalDamage = finalDamage * 0.075; 
                                 }
 
                                 ent.hp -= finalDamage;
